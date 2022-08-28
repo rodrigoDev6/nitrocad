@@ -312,8 +312,9 @@ return [
         ],
         [
             'text' => 'Usuarios',
-            'url' => 'usuario',
+            'url' => 'user',
             'icon' => 'fas fa-user',
+            'can' => 'is_admin',
         ],
     ],
 

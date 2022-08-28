@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -23,3 +25,13 @@ Route::get('/home', [
     App\Http\Controllers\HomeController::class,
     'index',
 ])->name('home');
+
+//Rotas de usuarios para visualização, cadastro, edição e exclusão
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+
+Route::get('/user/create', [UserController::class, 'create'])
+    ->name('user.create')
+    ->can('is_admin');
+Route::post('/user/create', [UserController::class, 'store'])
+    ->name('user.store')
+    ->can('is_admin');
