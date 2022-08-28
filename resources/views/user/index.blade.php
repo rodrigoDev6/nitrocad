@@ -8,11 +8,13 @@
 @section('content')
     <div class="card-body">
         @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
         @endif
     </div>
+
+    @php
+    $permission = Auth::user()->permissao;
+    $userSessionId = Auth::user()->id;
+    @endphp
 
 
     <div class="row">
@@ -23,8 +25,10 @@
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
-                                <a href="{{ route('user.create') }}" type="button"
-                                    class="btn btn-outline-success mr-2">Cadastrar Usuario</a>
+                                @if ($permission == 1)
+                                    <a href="{{ route('user.create') }}" type="button"
+                                        class="btn btn-outline-success mr-2">Cadastrar Usuario</a>
+                                @endif
                             </div>
                             <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                             <div class="input-group-append">
@@ -37,6 +41,9 @@
                     </div>
                 </div>
 
+
+
+
                 <div class="card-body table-responsive p-0" style="height: 300px;">
                     <table class="table table-head-fixed text-nowrap">
                         <thead>
@@ -46,7 +53,9 @@
                                 <th>Data de Cadastro</th>
                                 <th>Perfil</th>
                                 <th>Telefone</th>
-                                <th>Ações</th>
+                                @if ($permission == 1)
+                                    <th>Ações</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -61,10 +70,42 @@
                                         <td>Usuario Padrao</td>
                                     @endif
                                     <td>{{ $value->telefone }}</td>
-                                    <td>
-                                        <a type="button" class="btn btn-outline-primary">Editar</a>
-                                        <a type="button" class="btn btn-outline-danger">Excluir</a>
-                                    </td>
+                                    @if ($permission == 1)
+                                        <td>
+                                            <a type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                                data-target="#ModalDelete{{ $value->id }}" href="">Excluir</a>
+                                            {{-- MODAL DE EXCLUIR --}}
+                                            <div class="modal fade" id="ModalDelete{{ $value->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="ModalLabel">Confirmar</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="text-center">
+                                                                Confirma a exclusão do registro?
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Fechar</button>
+                                                            @if ($value->id != $userSessionId)
+                                                                {{ Form::open(['url' => 'user/' . $value->id, 'onsubmit' => 'return ConfirmDelete()']) }}
+                                                                {{ Form::hidden('_method', 'DELETE') }}
+                                                                {{ Form::submit('Excluir', ['class' => 'btn btn-danger']) }}
+                                                                {{ Form::close() }}
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

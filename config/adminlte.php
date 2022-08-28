@@ -314,7 +314,6 @@ return [
             'text' => 'Usuarios',
             'url' => 'user',
             'icon' => 'fas fa-user',
-            'can' => 'is_admin',
         ],
     ],
 

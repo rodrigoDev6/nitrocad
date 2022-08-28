@@ -16,30 +16,46 @@
             <form id="create" method="POST" action="{{ route('user.store') }}">
                 @csrf
                 <div class="card-body row">
+                    {{-- Validação de erros --}}
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="form-group col-12">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <span>{{ $error }}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                     <div class="form-group col-6">
                         <label for="username">Nome</label>
-                        <input type="text" class="form-control" id="username" name="name"
-                            placeholder="Nome Completo">
+                        <input type="text" class="form-control" id="username" name="name" placeholder="Nome Completo"
+                            required>
                     </div>
 
                     <div class="form-group col-6">
                         <label for="phone">Telefone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
+                        <input type="text" class="form-control" id="phone" name="telefone" placeholder="Telefone"
+                            required>
 
                     </div>
 
                     <div class="form-group col-6">
                         <label for="email">E-mail</label>
                         <input type="email" class="form-control" id="email" name="email"
-                            placeholder="Digite seu melho E-mail">
+                            placeholder="Digite seu melho E-mail" required>
                     </div>
                     <div class="form-group col-6">
                         <label for="password">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                            required>
                     </div>
                     <div class="form-group col-12">
                         <label for="permission">Permissão</label>
-                        <select class="form-control" name="permission">
+                        <select class="form-control" name="permission" required>
+                            <option value="">-selecione-</option>
                             <option value="1">Administrador</option>
                             <option value="0">Usuario Padrão</option>
                         </select>
