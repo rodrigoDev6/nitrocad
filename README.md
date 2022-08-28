@@ -27,6 +27,7 @@
         Pronto agora basta abrir a pasta do projeto public no seu navegador.
     </li>
 </ol>
+
 <hr>
 
 <h3>O que a aplicação faz :</h3>
@@ -43,3 +44,9 @@
     O usuário padrão só pode ver uma lista de usuários cadastrados dentro do sistema. 
     </li>
 </ol>
+
+<hr>
+
+<h3>Como realizei a tarefa de nível de permissão :</h3>
+
+<p>Através </p>
