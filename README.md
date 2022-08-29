@@ -49,4 +49,6 @@
 
 <h3>Como realizei a tarefa de nível de permissão :</h3>
 
-<p>Através </p>
+<p>Através de providers, eu adicionei dentro do arquivo AppServiceProvider na funcção boot uma regra de permissão com o Gate onde o user que estiver com a permissão igual a 1 será is_admin e quando for igual a 0 is_padrao. <br>
+Após essa difinição eu utilizo a função can em algumas rotas para não permitir que um usuário sem ser is_admin crie ou exclua usuários dentro do sistema.
+</p>

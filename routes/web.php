@@ -36,6 +36,6 @@ Route::post('/user/create', [UserController::class, 'store'])
     ->name('user.store')
     ->can('is_admin');
 
-Route::delete('/user/{id}', [UserController::class, 'destroy'])->name(
-    'user.destroy'
-);
+Route::delete('/user/{id}', [UserController::class, 'destroy'])
+    ->name('user.destroy')
+    ->can('is_admin');
