@@ -53,8 +53,8 @@
                             required>
                     </div>
                     <div class="form-group col-12">
-                        <label for="permission">Permissão</label>
-                        <select class="form-control" name="permission" required>
+                        <label for="level">Nível</label>
+                        <select class="form-control" name="level" id="level" required>
                             <option value="">-selecione-</option>
                             <option value="1">Administrador</option>
                             <option value="0">Usuario Padrão</option>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Exception;
 use Illuminate\Auth;
 use App\Models\User;
+use Exception as GlobalException;
 
 class UserController extends Controller
 {
@@ -61,14 +63,18 @@ class UserController extends Controller
             $messages
         );
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->telefone = $request->telefone;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->permissao = $request->permission;
+        try {
+            $user = new User();
+            $user->nome = $request->name;
+            $user->telefone = $request->telefone;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->nivel = $request->level;
 
-        $user->save();
+            $user->save();
+        } catch (GlobalException $e) {
+            return $e->getMessage();
+        }
 
         return redirect('/user')->with(
             'status',

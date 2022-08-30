@@ -12,7 +12,7 @@
     </div>
 
     @php
-    $permission = Auth::user()->permissao;
+    $nivel = Auth::user()->nivel_id;
     $userSessionId = Auth::user()->id;
     @endphp
 
@@ -25,7 +25,7 @@
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
-                                @if ($permission == 1)
+                                @if ($nivel == 1)
                                     <a href="{{ route('user.create') }}" type="button"
                                         class="btn btn-outline-success mr-2">Cadastrar Usuario</a>
                                 @endif
@@ -53,7 +53,7 @@
                                 <th>Data de Cadastro</th>
                                 <th>Perfil</th>
                                 <th>Telefone</th>
-                                @if ($permission == 1)
+                                @if ($nivel == 1)
                                     <th>Ações</th>
                                 @endif
                             </tr>
@@ -62,7 +62,7 @@
                             @foreach ($user as $key => $value)
                                 <tr>
                                     <td>{{ $value->id }}</td>
-                                    <td>{{ $value->name }}</td>
+                                    <td>{{ $value->nome }}</td>
                                     <td>{{ $value->created_at->format('d/m/Y') }}</td>
                                     @if ($value->permissao == 1)
                                         <td>Admin</td>
@@ -70,7 +70,7 @@
                                         <td>Usuario Padrao</td>
                                     @endif
                                     <td>{{ $value->telefone }}</td>
-                                    @if ($permission == 1)
+                                    @if ($nivel == 1)
                                         <td>
                                             <a type="button" class="btn btn-outline-danger" data-toggle="modal"
                                                 data-target="#ModalDelete{{ $value->id }}" href="">Excluir</a>

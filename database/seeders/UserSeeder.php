@@ -18,16 +18,24 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Administrador',
             'telefone' => '21975028324',
+            'nivel_id' => 1,
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123456'),
-            'permissao' => 1,
         ]);
         User::create([
             'name' => 'Usuario Padrão',
             'telefone' => '21975028324',
+            'nivel_id' => 0,
             'email' => 'padrao@gmail.com',
             'password' => Hash::make('123456'),
-            'permissao' => 0,
+        ]);
+
+        User::create([
+            'name' => 'Rodrigo',
+            'telefone' => '21975028324',
+            'nivel_id' => 1,
+            'email' => 'admin2@gmail.com',
+            'password' => Hash::make('123456'),
         ]);
     }
 }
