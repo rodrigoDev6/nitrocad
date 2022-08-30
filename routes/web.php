@@ -26,7 +26,7 @@ Route::get('/home', [
     'index',
 ])->name('home');
 
-//Rotas de usuarios para visualização, cadastro, edição e exclusão
+//Rotas de usuarios para visualização, cadastro e exclusão
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
 Route::get('/user/create', [UserController::class, 'create'])

@@ -7,7 +7,9 @@
 
 @section('content')
     <div class="card-body">
-        @if (session('status'))
+        @if (session('statusCadastrado'))
+        @endif
+        @if (session('statusExluido'))
         @endif
     </div>
 
@@ -62,12 +64,12 @@
                             @foreach ($user as $key => $value)
                                 <tr>
                                     <td>{{ $value->id }}</td>
-                                    <td>{{ $value->nome }}</td>
+                                    <td>{{ $value->name }}</td>
                                     <td>{{ $value->created_at->format('d/m/Y') }}</td>
-                                    @if ($value->permissao == 1)
+                                    @if ($value->nivel_id == 1)
                                         <td>Admin</td>
-                                    @elseif ($value->permissao == 0)
-                                        <td>Usuario Padrao</td>
+                                    @elseif ($value->nivel_id == 0)
+                                        <td>Padrão</td>
                                     @endif
                                     <td>{{ $value->telefone }}</td>
                                     @if ($nivel == 1)

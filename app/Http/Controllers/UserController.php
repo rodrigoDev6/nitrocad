@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Exception;
-use Illuminate\Auth;
 use App\Models\User;
 use Exception as GlobalException;
 
@@ -41,22 +40,25 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'name.required' => 'O nome é obrigatório!',
+            'name.required' => 'O Nome é obrigatório!',
 
-            'telefone.required' => 'O telefone é obrigatório!',
-            'telefone.min' => 'O telefone deve ter 11 digitos!',
+            'phone.required' => 'O Telefone é obrigatório!',
+            'phone.min' => 'O Telefone deve ter 11 digitos!',
 
-            'email.required' => 'O email é obrigatório!',
-            'email.unique' => 'O email já existe!',
+            'level.required' => 'O Nível é obrigatório!',
+            'level.min' => 'O telefone deve ter 11 digitos!',
+
+            'email.required' => 'O E-mail é obrigatório!',
+            'email.unique' => 'O E-mail já existe!',
 
             'password.required' => 'A senha é obrigatório!',
             'password.min' => 'A senha deve ter no mínimo 6 digitos!',
         ];
-
         $request->validate(
             [
                 'name' => 'required|min:2',
-                'telefone' => 'required|min:11',
+                'phone' => 'required|min:11',
+                'level' => 'required',
                 'email' => 'required|unique:users,email',
                 'password' => 'required|min:6',
             ],
@@ -65,21 +67,20 @@ class UserController extends Controller
 
         try {
             $user = new User();
-            $user->nome = $request->name;
-            $user->telefone = $request->telefone;
+            $user->name = $request->name;
+            $user->telefone = $request->phone;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
-            $user->nivel = $request->level;
+            $user->nivel_id = $request->level;
 
             $user->save();
+            return redirect('/user')->with(
+                'statusCreate',
+                'Usuario criado com sucesso!!'
+            );
         } catch (GlobalException $e) {
             return $e->getMessage();
         }
-
-        return redirect('/user')->with(
-            'status',
-            'Usuario criado com sucesso!!'
-        );
     }
 
     /**
@@ -90,12 +91,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-
-        $user->delete();
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+        } catch (GlobalException $e) {
+            return $e->getMessage();
+        }
 
         return redirect('/user')->with(
-            'status',
+            'statusExcluido',
             'Usuário excluido com sucesso!'
         );
     }

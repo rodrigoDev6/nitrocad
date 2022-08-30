@@ -31,30 +31,28 @@
                     @endif
                     <div class="form-group col-6">
                         <label for="username">Nome</label>
-                        <input type="text" class="form-control" id="username" name="name" placeholder="Nome Completo"
-                            required>
+                        <input type="text" class="form-control" id="username" name="name"
+                            placeholder="Nome Completo">
                     </div>
 
                     <div class="form-group col-6">
                         <label for="phone">Telefone</label>
-                        <input type="text" class="form-control" id="phone" name="telefone" placeholder="Telefone"
-                            required>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
 
                     </div>
 
                     <div class="form-group col-6">
                         <label for="email">E-mail</label>
                         <input type="email" class="form-control" id="email" name="email"
-                            placeholder="Digite seu melho E-mail" required>
+                            placeholder="Digite seu melho E-mail">
                     </div>
                     <div class="form-group col-6">
                         <label for="password">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                            required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-group col-12">
-                        <label for="level">Nível</label>
-                        <select class="form-control" name="level" id="level" required>
+                        <label for="level">Nível de Acesso</label>
+                        <select class="form-control" name="level" id="level">
                             <option value="">-selecione-</option>
                             <option value="1">Administrador</option>
                             <option value="0">Usuario Padrão</option>

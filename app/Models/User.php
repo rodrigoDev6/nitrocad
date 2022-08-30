@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     public function setNivel()
     {
-        return $this->hasOne(Nivel::class, 'id', 'categoria_id');
+        return $this->hasOne(Nivel::class, 'id', 'nivel_id');
     }
     /**
      * The attributes that are mass assignable.

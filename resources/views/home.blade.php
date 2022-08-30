@@ -50,15 +50,4 @@
 @stop
 
 @section('js')
-    <script src="vendor/inputmask/jquery.inputmask.min.js"></script>
-    <script>
-        console.log('hi');
-
-
-        $(document).ready(function() {
-            $("#phone").inputmask({
-                "mask": "(99) 9 999-9999"
-            });
-        });
-    </script>
 @stop
